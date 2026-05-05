@@ -15,3 +15,13 @@ content-type: application/json
 	"email": "user1@nestjs.com",
 	"password": "Password!123"
 }
+
+###
+
+GET http://localhost:3000/coffees
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidXNlcjFAbmVzdGpzLmNvbSIsImlhdCI6MTc3Nzk3Mzg0OCwiZXhwIjoxNzc3OTc3NDQ4LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.Z96nfYq1v8uztzJT-zvAKFu8noV-JVTjr_zG9fz59XE
+###
+
+GET http://localhost:3000/coffees
+Cookie: accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidXNlcjFAbmVzdGpzLmNvbSIsImlhdCI6MTc3Nzk3Mzg0OCwiZXhwIjoxNzc3OTc3NDQ4LCJhdWQiOiJsb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImxvY2FsaG9zdDozMDAwIn0.Z96nfYq1v8uztzJT-zvAKFu8noV-JVTjr_zG9fz59XE
+###
