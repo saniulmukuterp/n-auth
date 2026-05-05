@@ -25,7 +25,6 @@ export class AccessTokenGuard implements CanActivate {
     // wrapper GqlExecutionContext here instead.~
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromCookie(request);
-    console.log('token is: ', token)
     if (!token) {
       throw new UnauthorizedException();
     }
