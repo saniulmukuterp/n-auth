@@ -21,6 +21,7 @@ export class AuthenticationController {
   //   return this.authService.signIn(signInDto);
   // }
 
+  // @Auth(AuthType.Bearer)
   @HttpCode(HttpStatus.OK) // by default @Post does 201, we wanted 200 - hence using @HttpCode(HttpStatus.OK)
   @Post('sign-in')
   async signIn(@Res({ passthrough: true }) response, @Body() signInDto: SignInDto) {

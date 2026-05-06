@@ -24,6 +24,8 @@ export class AuthenticationGuard implements CanActivate {
       [AuthType.Bearer]: this.accessTokenGuard,
       [AuthType.None]: { canActivate: () => true },
     };
+    console.log({ accessTokenGuard: this.accessTokenGuard })
+    console.log({ authTypeGuardMap: this.authTypeGuardMap })
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -32,9 +34,12 @@ export class AuthenticationGuard implements CanActivate {
       [context.getHandler(), context.getClass()],
     ) ?? [AuthenticationGuard.defaultAuthType];
     const guards = authTypes.map((type) => this.authTypeGuardMap[type]).flat();
+    const without = authTypes.map((type) => this.authTypeGuardMap[type]);
+
+   
     let error = new UnauthorizedException();
 
-    for (const instance of guards) {
+    for (const instance of without) {
       const canActivate = await Promise.resolve(
         instance.canActivate(context),
       ).catch((err) => {
