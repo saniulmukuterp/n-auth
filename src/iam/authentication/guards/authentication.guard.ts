@@ -13,7 +13,7 @@ import { AccessTokenGuard } from './access-token.guard';
 @Injectable()
 export class AuthenticationGuard implements CanActivate {
   private static readonly defaultAuthType = AuthType.Bearer;
-  private readonly authTypeGuardMap: Record<AuthType, CanActivate | CanActivate[]>;
+  private readonly authTypeGuardMap: Record<AuthType, CanActivate[]>;
 
   constructor(
     private readonly reflector: Reflector,
@@ -21,11 +21,9 @@ export class AuthenticationGuard implements CanActivate {
   ) {
     // 👇 now accessTokenGuard is already initialized
     this.authTypeGuardMap = {
-      [AuthType.Bearer]: this.accessTokenGuard,
-      [AuthType.None]: { canActivate: () => true },
+      [AuthType.Bearer]: [this.accessTokenGuard],
+      [AuthType.None]: [{ canActivate: () => true }],
     };
-    console.log({ accessTokenGuard: this.accessTokenGuard })
-    console.log({ authTypeGuardMap: this.authTypeGuardMap })
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -35,7 +33,7 @@ export class AuthenticationGuard implements CanActivate {
     ) ?? [AuthenticationGuard.defaultAuthType];
     const guards = authTypes.map((type) => this.authTypeGuardMap[type]).flat();
 
-   
+
     let error = new UnauthorizedException();
 
     for (const instance of guards) {
